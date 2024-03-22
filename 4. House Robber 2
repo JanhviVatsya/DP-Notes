@@ -1,0 +1,30 @@
+Hint: Dono first aur last element ek sath to include nhi kr skte solution mein, ek hi krenge dono mein se,
+To 2 arrays bna lenge ek temp1 aur temp2
+temp1 --> first element ko chhodke sare elements daal denge
+temp2--> last element ko chhodke saare elements daal denge
+iske baad house robber1 jaisa hi hai solution...
+
+
+int houserobber1(vector<int>nums){
+    if(nums.size()==1) return nums[0];
+    int n=nums.size();
+    int prev=max(nums[1], nums[0]), prev2=nums[0];
+    for(int i=2; i<n; i++){
+        int pick=nums[i]+prev2;
+        int notpick= prev;
+        prev2=prev;
+        prev=max(pick, notpick);
+    }
+    return prev;
+}
+
+    int rob(vector<int>& nums) {
+        if(nums.size()==1) return nums[0];
+        int n=nums.size();
+        vector<int> temp1, temp2;
+        for(int i=0; i<n; i++){
+            if(i!=0) temp1.push_back(nums[i]);
+            if(i!=n-1) temp2.push_back(nums[i]);
+        }
+        return max(houserobber1(temp1), houserobber1(temp2));
+    }
